@@ -16,5 +16,21 @@ Aggregate {
 <h4>Wikipedia and Weaviate - Article, Paragraph </h4>
 
 ```graphql
+{
+  Get {
+    Paragraph(
+      nearText: {
+        concepts: ["What was Obama's legacy?"],
+      }
+      where: {
+        operator: Equal
+        path: ["inArticle", "Article", "title"]
+        valueString: "Barack Obama"
+    ){
+    content
+    order
+    title
+    }
+}
 
 ```
