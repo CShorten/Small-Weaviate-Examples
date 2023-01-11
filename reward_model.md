@@ -1,3 +1,4 @@
+```pythoh
 import torch
 
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
@@ -29,3 +30,4 @@ sorted_dict = sorted(score_dict.items(), key = lambda item: item[1], reverse=Tru
 print(sorted_dict)
 print("\n")
 print(candidate_responses[sorted_dict[0][0]])
+```
