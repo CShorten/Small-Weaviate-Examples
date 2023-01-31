@@ -1,3 +1,4 @@
+```python
 import weaviate
 from weaviate.util import generate_uuid5, get_valid_uuid
 from uuid import uuid4
@@ -38,3 +39,4 @@ for doc_idx, doc in enumerate(corpus):
     )
 
 print(f"Uploaded {len(corpus)} documents in {time.time() - doc_upload_start} seconds.")
+```
