@@ -1,0 +1,64 @@
+The Aggregate{} function is structured as follows:
+
+```graphql
+{
+  Aggregate {
+    <Class> (groupBy:[<property>]) {
+      groupedBy { # requires `groupBy` filter
+          path
+          value
+      }
+      meta {
+        count
+      }
+      <propertyOfDatatypeString> {
+          count
+          type
+          topOccurrences {
+              value
+              occurs
+          }
+      }
+      <propertyOfDatatypeText> {
+          count
+          type
+          topOccurrences {
+              value
+              occurs
+          }
+      }
+      <propertyOfDatatypeNumberOrInteger> {
+          count
+          type
+          minimum
+          maximum
+          mean
+          median
+          mode
+          sum
+      }
+      <propertyOfDatatypeBoolean> {
+          count
+          type
+          totalTrue
+          totalFalse
+          percentageTrue
+          percentageFalse
+      }
+      <propertyWithReference>
+        pointingTo
+        type
+    }
+  }
+}
+```
+
+Schema:
+```json
+{
+  "Class": "PodcastClip",
+  "properties": [
+    {
+      "name": "speaker",
+       "dataType": ["text"]
+     },
