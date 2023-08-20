@@ -1,20 +1,59 @@
 {
-    "code": "###Instruction: Write an API implementation that takes customer reviews as input and extracts features to analyze customer sentiment.\n###Output: <<<domain>>>: Natural Language Processing Feature Extraction\n<<<api_call>>>: AutoModel.from_pretrained('YituTech/conv-bert-base')\n<<<api_provider>>>: Hugging Face Transformers\n<<<explanation>>>: 1. We import the necessary classes from the transformers package. This includes AutoTokenizer and AutoModel for tokenizing and processing customer review text.\n2. We use the from_pretrained method of the AutoModel class to load the pre-trained model 'YituTech/conv-bert-base'. This model is based on ConvBERT and is suitable for feature extraction in text data.\n3. We load the customer review text, tokenize it, and use the model to extract features from the review. These features can then be used to analyze customer sentiment.\n<<<code>>>: from transformers import AutoTokenizer, AutoModel\ntokenizer = AutoTokenizer.from_pretrained('YituTech/conv-bert-base')\nmodel = AutoModel.from_pretrained('YituTech/conv-bert-base')\ninputs = tokenizer(customer_review, return_tensors='pt')\nfeatures = model(**inputs)\n",
-    "api_call": "AutoModel.from_pretrained('YituTech/conv-bert-base')",
-    "provider": "Hugging Face Transformers",
+    "code": "###Instruction: Our customer is a robotic manufacturer of cleaning devices. They ask for our help on solving user's questions about the maintenance of their devices.\n###Output: <<<domain>>>: Natural Language Processing Question Answering\n<<<api_call>>>: DPRQuestionEncoder.from_pretrained('facebook/dpr-question_encoder-single-nq-base')\n<<<api_provider>>>: Transformers\n<<<explanation>>>:1. We first import the necessary classes from the transformers package. This includes DPRQuestionEncoder and DPRQuestionEncoderTokenizer for encoding user's questions.\n2. We use the from_pretrained method of the DPRQuestionEncoder and DPRQuestionEncoderTokenizer classes to load the pre-trained model and tokenizer 'facebook/dpr-question_encoder-single-nq-base'.\n3. Tokenize the user's question using the loaded tokenizer.\n4. We then use the loaded model to encode the tokenized question and obtain question embeddings.\n5. These embeddings can be further used to find the appropriate passages in the knowledge base that relate to the maintenance of the cleaning devices.\n<<<code>>>: from transformers import DPRQuestionEncoder, DPRQuestionEncoderTokenizer\ntokenizer = DPRQuestionEncoderTokenizer.from_pretrained('facebook/dpr-question_encoder-single-nq-base')\nmodel = DPRQuestionEncoder.from_pretrained('facebook/dpr-question_encoder-single-nq-base')\n\nquestion = \"How do I clean the filter of my robotic vacuum cleaner?\"\ninput_ids = tokenizer(question, return_tensors='pt')['input_ids']\nembeddings = model(input_ids).pooler_output\n",
+    "api_call": "DPRQuestionEncoder.from_pretrained('facebook/dpr-question_encoder-single-nq-base')",
+    "provider": "Transformers",
     "api_data": {
-        "domain": "Natural Language Processing Feature Extraction",
-        "framework": "Hugging Face Transformers",
+        "domain": "Natural Language Processing Question Answering",
+        "framework": "Transformers",
         "functionality": "Feature Extraction",
-        "api_name": "YituTech/conv-bert-base",
-        "api_call": "AutoModel.from_pretrained('YituTech/conv-bert-base')",
-        "api_arguments": "N/A",
-        "python_environment_requirements": "transformers",
-        "example_code": "N/A",
+        "api_name": "facebook/dpr-question_encoder-single-nq-base",
+        "api_call": "DPRQuestionEncoder.from_pretrained('facebook/dpr-question_encoder-single-nq-base')",
+        "api_arguments": [
+            "input_ids"
+        ],
+        "python_environment_requirements": [
+            "transformers"
+        ],
+        "example_code": "from transformers import DPRQuestionEncoder, DPRQuestionEncoderTokenizer\ntokenizer = DPRQuestionEncoderTokenizer.from_pretrained(facebook/dpr-question_encoder-single-nq-base)\nmodel = DPRQuestionEncoder.from_pretrained(facebook/dpr-question_encoder-single-nq-base)\ninput_ids = tokenizer(Hello, is my dog cute ?, return_tensors=pt)[input_ids]\nembeddings = model(input_ids).pooler_output",
         "performance": {
-            "dataset": "N/A",
-            "accuracy": "N/A"
+            "dataset": [
+                {
+                    "name": "NQ",
+                    "accuracy": {
+                        "top_20": 78.4,
+                        "top_100": 85.4
+                    }
+                },
+                {
+                    "name": "TriviaQA",
+                    "accuracy": {
+                        "top_20": 79.4,
+                        "top_100": 85.0
+                    }
+                },
+                {
+                    "name": "WQ",
+                    "accuracy": {
+                        "top_20": 73.2,
+                        "top_100": 81.4
+                    }
+                },
+                {
+                    "name": "TREC",
+                    "accuracy": {
+                        "top_20": 79.8,
+                        "top_100": 89.1
+                    }
+                },
+                {
+                    "name": "SQuAD",
+                    "accuracy": {
+                        "top_20": 63.2,
+                        "top_100": 77.2
+                    }
+                }
+            ]
         },
-        "description": "A pre-trained ConvBERT model for feature extraction provided by YituTech, based on the Hugging Face Transformers library."
+        "description": "Dense Passage Retrieval (DPR) is a set of tools and models for state-of-the-art open-domain Q&A research. dpr-question_encoder-single-nq-base is the question encoder trained using the Natural Questions (NQ) dataset (Lee et al., 2019; Kwiatkowski et al., 2019)."
     }
 }
